@@ -62,8 +62,9 @@ byteSubstitution:
 	loop1_byteSubstitution:
 		movl $32, -8(%rbp)
 		loop2_byteSubstitution:
+			xor %r10, %r10
 			movb (%rdi), %r10b
-			movb (%rsi,%r10b,1), %r11b
+			movb (%rsi,%r10,1), %r11b
 			movb %r11b, (%rdi) 
 			
 			addq $1, %rdi
