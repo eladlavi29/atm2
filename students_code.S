@@ -17,9 +17,40 @@ sbox:	.byte	99,124,119,123,-14,107,111,-59,48,1,103,43,-2,-41,-85,118
 		.byte	112,62,-75,102,72,3,-10,14,97,53,87,-71,-122,-63,29,-98
 		.byte	-31,-8,-104,17,105,-39,-114,-108,-101,30,-121,-23,-50,85,40,-33
 		.byte	-116,-95,-119,13,-65,-26,66,104,65,-103,45,15,-80,84,-69,22
-
+	
+	msg: .ascii "HI"
+	msg_len: .quad msg_len - msg
+	
 .section	.text
 keyMixing:
+	#rdi contains input
+	#rsi contains key
+	#Assign local vars int i and j
+	pushq %rbp
+	movq %rsp, rbp
+	subq $8, %rsp
+	movl $0, -4(%rbp)
+	
+	loop1_keyMixing:
+		movl $0, -8(%rbp)
+		
+		loop2_keyMixing:
+		
+			movq $1, %rax
+			movq $1, %rdi
+			movq $msg, %rsi
+			movq (msg_len), %rdx
+			syscall
+		
+			decl -8(%rbp)
+			cmpl $0, -8(%rbp)
+			jg loop2_keyMixing
+			
+		decl -4(%rbp)
+		cmpl $0, -4(%rbp)
+		jg loop2_keyMixing
+	
+	leave
 	ret
 
 
