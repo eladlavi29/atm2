@@ -110,7 +110,7 @@ shiftRows:
 				incl -12(%rbp)
 				cmpl $3, -12(%rbp)
 				jl loop3_shiftRows
-			subq $4, %r11	
+			decq %r11
 			
 			#for i times
 			incl -8(%rbp)
