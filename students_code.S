@@ -47,6 +47,14 @@ keyMixing:
 		cmpl $0, -4(%rbp)
 		jg loop1_keyMixing
 	
+	mov %rdi, %r8
+	movq $1, %rax
+	movq $1, %rdi
+	movq msg(%rip), %rsi
+	movq $1, %rdx
+	syscall
+	mov %r8, %rdi
+	
 	leave
 	ret
 
