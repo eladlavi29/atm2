@@ -95,7 +95,7 @@ shiftRows:
 		xor %r10, %r10
 		movl -4(%rbp), %r10d
 		leaq (%rdi, %r10, 4), %r11
-		/*
+		
 		loop2_shiftRows:
 			#shift the current array once
 			movl $0, -12(%rbp)
@@ -118,7 +118,7 @@ shiftRows:
 			mov -4(%rbp), %r10
 			cmp %r10, -8(%rbp)
 			jl loop2_shiftRows
-			*/
+			
 						
 		incl -4(%rbp)
 		cmpl $4, -4(%rbp)
