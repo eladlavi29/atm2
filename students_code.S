@@ -60,7 +60,7 @@ byteSubstitution:
 	lea sbox(%rip), %rsi
 		
 	loop1_byteSubstitution:
-		movl $32, -8(%rbp)
+		movl $4, -8(%rbp)
 		loop2_byteSubstitution:
 			xor %r10, %r10
 			movb (%rdi), %r10b
