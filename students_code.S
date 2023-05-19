@@ -27,7 +27,7 @@ keyMixing:
 	#rsi contains key
 	#Assign local vars int i and j
 	pushq %rbp
-	movq %rsp, rbp
+	movq %rsp, %rbp
 	subq $8, %rsp
 	movl $0, -4(%rbp)
 	
