@@ -1,9 +1,6 @@
 .global	keyMixing, byteSubstitution, shiftRows, cipher
 
 .section	.data
-msg: .ascii "HI"
-msg_len: .quad msg_len - msg
-	
 sbox:	.byte	99,124,119,123,-14,107,111,-59,48,1,103,43,-2,-41,-85,118
 		.byte	-54,-126,-55,125,-6,89,71,-16,-83,-44,-94,-81,-100,-92,114,-64
 		.byte	-73,-3,-109,38,54,63,-9,-52,52,-91,-27,-15,113,-40,49,21
@@ -29,18 +26,14 @@ keyMixing:
 	pushq %rbp
 	movq %rsp, %rbp
 	subq $8, %rsp
-	movl $0, -4(%rbp)
+	movl $4, -4(%rbp)
+	
+	xor %r11, %r11
 	
 	loop1_keyMixing:
-		movl $0, -8(%rbp)
-		
+		movl $4, -8(%rbp)
 		loop2_keyMixing:
-		
-			movq $1, %rax
-			movq $1, %rdi
-			movq $msg, %rsi
-			movq (msg_len), %rdx
-			syscall
+			inc %r11
 		
 			decl -8(%rbp)
 			cmpl $0, -8(%rbp)
