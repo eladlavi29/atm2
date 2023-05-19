@@ -1,7 +1,6 @@
 #include "aux_tests.h"
 
 int main() {
-	/*
     int len = 1;//get_len();
     uint8_t* input = malloc(len*4*4);
     get_input(input, len);
@@ -22,7 +21,7 @@ int main() {
             printf("%02hhx",key[i][j]);
         }
     }
-    printf("\n");
+    printf("\n");*/
     keyMixing((uint8_t(*)[4])input, key);
     printf("0x");
     for(int l=0; l<len; l++){
@@ -34,6 +33,5 @@ int main() {
     }
     printf("\n");
     free(input);
-	*/
     return 0;
 }
