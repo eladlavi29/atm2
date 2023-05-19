@@ -115,9 +115,8 @@ shiftRows:
 					
 			#for i times
 			incl -8(%rbp)
-			movq -4(%rbp), %r10
-			#cmpl %r10, -8(%rbp)
-			cmpl $2, -8(%rbp)
+			movl -4(%rbp), %r10d
+			cmpl %r10d, -8(%rbp)
 			jl loop2_shiftRows
 						
 		incl -4(%rbp)
