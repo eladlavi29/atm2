@@ -50,6 +50,31 @@ keyMixing:
 
 
 byteSubstitution:
+	#rdi contains input
+	#Assign local vars int i and j
+	pushq %rbp
+	movq %rsp, %rbp
+	subq $8, %rsp
+	movl $4, -4(%rbp)
+		
+	loop1_keyMixing:
+		movl $4, -8(%rbp)
+		loop2_keyMixing:
+			mov (%rdi), %r10
+			mov sbox(,%r10,1), %r11
+			mov %r11, (%rdi) 
+			
+			addq $8, %rdi
+			
+			decl -8(%rbp)
+			cmpl $0, -8(%rbp)
+			jg loop2_keyMixing
+			
+		decl -4(%rbp)
+		cmpl $0, -4(%rbp)
+		jg loop2_keyMixing
+	
+	leave
 	ret
 
 
