@@ -43,7 +43,7 @@ keyMixing:
 			
 		decl -4(%rbp)
 		cmpl $0, -4(%rbp)
-		jg loop2_keyMixing
+		jg loop1_keyMixing
 	
 	leave
 	ret
@@ -57,9 +57,9 @@ byteSubstitution:
 	subq $8, %rsp
 	movl $4, -4(%rbp)
 		
-	loop1_keyMixing:
+	loop1_byteSubstitution:
 		movl $4, -8(%rbp)
-		loop2_keyMixing:
+		loop2_byteSubstitution:
 			mov (%rdi), %r10
 			mov sbox(,%r10,1), %r11
 			mov %r11, (%rdi) 
@@ -68,11 +68,11 @@ byteSubstitution:
 			
 			decl -8(%rbp)
 			cmpl $0, -8(%rbp)
-			jg loop2_keyMixing
+			jg loop2_byteSubstitution
 			
 		decl -4(%rbp)
 		cmpl $0, -4(%rbp)
-		jg loop2_keyMixing
+		jg loop1_byteSubstitution
 	
 	leave
 	ret
