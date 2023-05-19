@@ -31,7 +31,7 @@ keyMixing:
 	loop1_keyMixing:
 		movl $4, -8(%rbp)
 		loop2_keyMixing:
-			xor %rdi, %rsi
+			xor %rsi, %rdi
 			
 			addq $8, %rdi
 			addq $8, %rsi
