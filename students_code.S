@@ -31,11 +31,11 @@ keyMixing:
 	loop1_keyMixing:
 		movl $4, -8(%rbp)
 		loop2_keyMixing:
-			mov (%rsi), %r10
-			xor %r10, (%rdi)
+			movb (%rsi), %r10b
+			xorb %r10b, (%rdi)
 			
-			addq $8, %rdi
-			addq $8, %rsi
+			incq %rdi
+			incq %rsi
 			
 			decl -8(%rbp)
 			cmpl $0, -8(%rbp)
@@ -82,8 +82,48 @@ byteSubstitution:
 
 
 shiftRows:
+/*
+	#rdi contains input
+	#Assign local vars int i, j and l
+	pushq %rbp
+	movq %rsp, %rbp
+	subq $12, %rsp
+	movl $1, -4(%rbp)
+			
+	loop1_shiftRows:
+		#insert the current array address in r11
+		movl $0, -8(%rbp)
+		mov -4(%rbp), %r10
+		lea (%rdi, %r10, 4), %r11
+		
+		loop2_shiftRows:
+			#shift the current array once
+			movl $0, -12(%rbp)
+			loop3_shiftRows:
+				#bubble up the first element using swaps
+				movb (%r11), %r10b
+				movq %r10, 1(%r11)
+				
+				incq %r11
+				incl -12(%rbp)
+				cmpl $3, -12(%rbp)
+				jl loop3_shiftRows
+				
+			
+			#for i times
+			incl -8(%rbp)
+			mov -4(%rbp), %r10
+			cmp %r10, -8(%rbp)
+			jl loop2_shiftRows
+						
+		incl -4(%rbp)
+		cmpl $4, -4(%rbp)
+		jl loop1_shiftRows
+	
+	leave
+	
+	*/
 	ret
-
 
 cipher:
 	ret
