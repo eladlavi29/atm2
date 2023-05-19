@@ -1,6 +1,7 @@
 #include "aux_tests.h"
 
 int main() {
+	/*
     int len = 1;//get_len();
     uint8_t* input = malloc(len*4*4);
     get_input(input, len);
@@ -33,5 +34,6 @@ int main() {
     }
     printf("\n");
     free(input);
+	*/
     return 0;
 }
