@@ -27,14 +27,15 @@ keyMixing:
 	movq %rsp, %rbp
 	subq $8, %rsp
 	movl $4, -4(%rbp)
-	
-	xor %rbx, %rbx
-	
+		
 	loop1_keyMixing:
 		movl $4, -8(%rbp)
 		loop2_keyMixing:
-			inc %rbx
-		
+			xor %rdi, %rsi
+			
+			addq $8, %rdi
+			addq $8, %rsi
+			
 			decl -8(%rbp)
 			cmpl $0, -8(%rbp)
 			jg loop2_keyMixing
