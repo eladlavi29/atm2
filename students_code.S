@@ -67,7 +67,7 @@ byteSubstitution:
 			movb (%rsi,%r10,1), %r11b
 			movb %r11b, (%rdi) 
 			
-			addq $1, %rdi
+			incq %rdi
 			
 			decl -8(%rbp)
 			cmpl $0, -8(%rbp)
@@ -92,7 +92,8 @@ shiftRows:
 	loop1_shiftRows:
 		#insert the current array address in r11
 		movl $0, -8(%rbp)
-		mov -4(%rbp), %r10
+		xor %r10, %r10
+		movl -4(%rbp), %r10d
 		lea (%rdi, %r10, 4), %r11
 		
 		loop2_shiftRows:
