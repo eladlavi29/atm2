@@ -99,7 +99,6 @@ shiftRows:
 		loop2_shiftRows:
 			#shift the current array once
 			movl $0, -12(%rbp)
-			mov %r11, %r10
 			loop3_shiftRows:
 				#bubble up the first element using swaps
 				movb (%r11), %al
@@ -111,7 +110,7 @@ shiftRows:
 				incl -12(%rbp)
 				cmpl $3, -12(%rbp)
 				jl loop3_shiftRows
-			mov %r10, %r11	
+			subq $4, %r11	
 			
 			#for i times
 			incl -8(%rbp)
