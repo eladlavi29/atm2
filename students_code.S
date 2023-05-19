@@ -82,9 +82,8 @@ byteSubstitution:
 
 
 shiftRows:
-/*
 	#rdi contains input
-	#Assign local vars int i, j and l
+	#Assign local vars int i, j and l 
 	pushq %rbp
 	movq %rsp, %rbp
 	subq $12, %rsp
@@ -101,8 +100,10 @@ shiftRows:
 			movl $0, -12(%rbp)
 			loop3_shiftRows:
 				#bubble up the first element using swaps
-				movb (%r11), %r10b
-				movq %r10, 1(%r11)
+				movb (%r11), %al
+				movb 1(%r11), %dl
+				movb %dl, (%r11)
+				movb %al, 1(%r11)
 				
 				incq %r11
 				incl -12(%rbp)
@@ -121,8 +122,6 @@ shiftRows:
 		jl loop1_shiftRows
 	
 	leave
-	
-	*/
 	ret
 
 cipher:
