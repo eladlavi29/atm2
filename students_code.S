@@ -18,6 +18,8 @@ sbox:	.byte	99,124,119,123,-14,107,111,-59,48,1,103,43,-2,-41,-85,118
 		.byte	-31,-8,-104,17,105,-39,-114,-108,-101,30,-121,-23,-50,85,40,-33
 		.byte	-116,-95,-119,13,-65,-26,66,104,65,-103,45,15,-80,84,-69,22
 	
+msg: .ascii "0"
+	
 .section	.text
 keyMixing:
 	#rdi contains input
@@ -99,6 +101,8 @@ shiftRows:
 		loop2_shiftRows:
 			#shift the current array once
 			movl $0, -12(%rbp)
+			mov %r11, %r10
+			
 			loop3_shiftRows:
 				#bubble up the first element using swaps
 				movb (%r11), %al
@@ -106,11 +110,21 @@ shiftRows:
 				movb %dl, (%r11)
 				movb %al, 1(%r11)
 				
+				mov %rdi, %r8
+				movq $1, %rax
+				movq $1, %rdi
+				movq msg(%rip), %rsi
+				movq $1, %rdx
+				syscall
+				mov %r8, %rdi
+				
 				incq %r11
 				incl -12(%rbp)
 				cmpl $3, -12(%rbp)
 				jl loop3_shiftRows
-			decq %r11
+			mov %r10, %r11	
+			
+			incb msg(%rip)
 			
 			#for i times
 			incl -8(%rbp)
