@@ -138,10 +138,10 @@ cipher:
 	#for each block (len blocks)
 	loop1_cipher:
 	
-	/*
 		#phase a
 		call keyMixing
 		
+		/*
 		#phase b
 		movl $9, -4(%rbp)
 		loop2_cipher:
@@ -153,7 +153,7 @@ cipher:
 			decl -4(%rbp)
 			cmpl $0, -4(%rbp)
 			jg loop2_cipher
-			
+		*/
 		#phase c
 		call byteSubstitution
 		
@@ -162,7 +162,6 @@ cipher:
 		
 		#phase e
 		call keyMixing
-		*/
 		
 		addq $16, %rdi
 		decq %rdx
