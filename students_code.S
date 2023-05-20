@@ -127,6 +127,44 @@ shiftRows:
 	ret
 
 cipher:
-
-	call mixColumns
+	#rdi contains input (address)
+	#rsi contains key (address)
+	#rdx contains len
+	#Assign local vars int i
+	pushq %rbp
+	movq %rsp, %rbp
+	subq $4, %rsp
+	
+	#for each block (len blocks)
+	loop1_cipher:
+		#phase a
+		call keyMixing
+		
+		#phase b
+		movl $9, -4(%rbp)
+		loop2_cipher:
+			call byteSubstitution
+			call shiftRows
+			call mixColumns
+			call keyMixing
+			
+			decl -4(%rbp)
+			cmpl $0, -4(%rbp)
+			jg loop2_cipher
+			
+		#phase c
+		call byteSubstitution
+		
+		#phase d
+		call shiftRows
+		
+		#phase e
+		call keyMixing
+		
+		addq %16, %rdi
+		decq %rdx
+		cmpq $0, %rdx
+		jg loop1_cipher
+	
+	leave
 	ret
