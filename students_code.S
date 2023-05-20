@@ -137,6 +137,8 @@ cipher:
 	
 	#for each block (len blocks)
 	loop1_cipher:
+	
+	/*
 		#phase a
 		call keyMixing
 		
@@ -160,6 +162,7 @@ cipher:
 		
 		#phase e
 		call keyMixing
+		*/
 		
 		addq $16, %rdi
 		decq %rdx
