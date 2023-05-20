@@ -127,4 +127,6 @@ shiftRows:
 	ret
 
 cipher:
+
+	call mixColumns
 	ret
