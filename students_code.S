@@ -161,7 +161,7 @@ cipher:
 		#phase e
 		call keyMixing
 		
-		addq %16, %rdi
+		addq $16, %rdi
 		decq %rdx
 		cmpq $0, %rdx
 		jg loop1_cipher
