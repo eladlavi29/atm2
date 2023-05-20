@@ -191,27 +191,27 @@ cipher:
 		pushq %rsi
 		pushq %rdx
 		call byteSubstitution
-		pushq %rdi
-		pushq %rsi
-		pushq %rdx
+		popq %rdx
+		popq %rsi
+		popq %rdi
 		
 		#phase d
 		pushq %rdi
 		pushq %rsi
 		pushq %rdx		
 		call shiftRows
-		pushq %rdi
-		pushq %rsi
-		pushq %rdx
+		popq %rdx
+		popq %rsi
+		popq %rdi
 		
 		#phase e
 		pushq %rdi
 		pushq %rsi
 		pushq %rdx		
 		call keyMixing
-		pushq %rdi
-		pushq %rsi
-		pushq %rdx
+		popq %rdx
+		popq %rsi
+		popq %rdi
 		
 		addq $16, %rdi
 		decq %rdx
