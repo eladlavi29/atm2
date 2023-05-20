@@ -139,29 +139,79 @@ cipher:
 	loop1_cipher:
 	
 		#phase a
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx
 		call keyMixing
+		popq %rdx
+		popq %rsi
+		popq %rdi
 		
-		/*
 		#phase b
 		movl $9, -4(%rbp)
 		loop2_cipher:
+			pushq %rdi
+			pushq %rsi
+			pushq %rdx
 			call byteSubstitution
+			popq %rdx
+			popq %rsi
+			popq %rdi
+			
+			pushq %rdi
+			pushq %rsi
+			pushq %rdx
 			call shiftRows
+			popq %rdx
+			popq %rsi
+			popq %rdi
+			
+			pushq %rdi
+			pushq %rsi
+			pushq %rdx
 			call mixColumns
+			popq %rdx
+			popq %rsi
+			popq %rdi
+			
+			pushq %rdi
+			pushq %rsi
+			pushq %rdx
 			call keyMixing
+			popq %rdx
+			popq %rsi
+			popq %rdi
 			
 			decl -4(%rbp)
 			cmpl $0, -4(%rbp)
 			jg loop2_cipher
-		*/
+			
 		#phase c
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx
 		call byteSubstitution
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx
 		
 		#phase d
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx		
 		call shiftRows
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx
 		
 		#phase e
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx		
 		call keyMixing
+		pushq %rdi
+		pushq %rsi
+		pushq %rdx
 		
 		addq $16, %rdi
 		decq %rdx
