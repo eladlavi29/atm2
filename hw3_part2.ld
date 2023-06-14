@@ -1,14 +1,10 @@
 ENTRY(_hw3_unicorn);
-
 EXTERN(purple);
 EXTERN(white);
-
 PHDRS
 {
-  text PT_LOAD FLAGS(3);
-  
   data PT_LOAD FLAGS(6);
-  
+  text PT_LOAD FLAGS(3);
   rodata PT_LOAD FLAGS(5);
 }
 
