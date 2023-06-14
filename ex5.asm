@@ -1,7 +1,7 @@
-.global _start
+.global _hw3_unicorn
 
 .section .text
-__hw3_unicorn:
+_hw3_unicorn:
 	#your code here
 	#rsi contains the prev leaf
 	xor %rsi, %rsi
